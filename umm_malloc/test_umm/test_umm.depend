@@ -1,0 +1,82 @@
+# depslib dependency file v1.0
+1520992075 source:c:\users\bigfish\downloads\umm_malloc-master\src\umm_info.c
+
+1520992075 source:c:\users\bigfish\downloads\umm_malloc-master\src\umm_integrity.c
+
+1520992075 source:c:\users\bigfish\downloads\umm_malloc-master\src\umm_poison.c
+
+1568599311 source:c:\users\bigfish\downloads\umm_malloc-master\test_umm\main.c
+	<stdio.h>
+	<stdlib.h>
+	"umm_malloc.h"
+
+1520992075 source:c:\users\bigfish\downloads\umm_malloc-master\src\umm_malloc.c
+	<stdio.h>
+	<string.h>
+	"umm_malloc.h"
+	"umm_malloc_cfg.h"
+	"dbglog/dbglog.h"
+	"umm_integrity.c"
+	"umm_poison.c"
+	"umm_info.c"
+
+1520992075 c:\users\bigfish\downloads\umm_malloc-master\src\umm_malloc.h
+
+1566435395 c:\users\bigfish\downloads\umm_malloc-master\src\umm_malloc_cfg.h
+
+1564643389 c:\users\bigfish\downloads\umm_malloc-master\includes\c-helper-macros\dbglog\dbglog.h
+
+1520992075 c:\users\bigfish\downloads\umm_malloc-master\src\umm_integrity.c
+
+1520992075 c:\users\bigfish\downloads\umm_malloc-master\src\umm_poison.c
+
+1520992075 c:\users\bigfish\downloads\umm_malloc-master\src\umm_info.c
+
+1562675687 source:c:\users\bigfish\downloads\umm_malloc-master\unity-master\src\unity.c
+	"unity.h"
+	<stddef.h>
+	<avr/pgmspace.h>
+
+1562675687 c:\users\bigfish\downloads\umm_malloc-master\unity-master\src\unity.h
+	"unity_internals.h"
+
+1562675687 c:\users\bigfish\downloads\umm_malloc-master\unity-master\src\unity_internals.h
+	"unity_config.h"
+	<setjmp.h>
+	<math.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdint.h>
+	<limits.h>
+	<stdio.h>
+	<stdio.h>
+	<time.h>
+	<time.h>
+
+1568599298 source:c:\users\bigfish\downloads\umm_malloc-master\test\test_umm_malloc.c
+	"stdbool.h"
+	"stdlib.h"
+	"string.h"
+	"unity_fixture.h"
+	"umm_malloc.h"
+	"umm_malloc_cfg.h"
+	"dbglog/dbglog.h"
+
+1562675687 c:\users\bigfish\downloads\umm_malloc-master\unity-master\extras\fixture\src\unity_fixture.h
+	"unity.h"
+	"unity_internals.h"
+	"unity_fixture_malloc_overrides.h"
+	"unity_fixture_internals.h"
+
+1562675687 c:\users\bigfish\downloads\umm_malloc-master\unity-master\extras\fixture\src\unity_fixture_malloc_overrides.h
+	<stddef.h>
+	<stdlib.h>
+
+1562675687 c:\users\bigfish\downloads\umm_malloc-master\unity-master\extras\fixture\src\unity_fixture_internals.h
+
+1562675687 source:c:\users\bigfish\downloads\umm_malloc-master\unity-master\extras\fixture\src\unity_fixture.c
+	"unity_fixture.h"
+	"unity_internals.h"
+	<string.h>
+	<stdlib.h>
+

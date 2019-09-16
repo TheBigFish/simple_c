@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="test_umm" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/test_umm" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="../includes/c-helper-macros" />
+					<Add directory="../Unity-master/extras/fixture/src" />
+					<Add directory="../src" />
+					<Add directory="../Unity-master/src" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/test_umm" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="../Unity-master/extras/fixture/src/unity_fixture.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Unity-master/extras/fixture/src/unity_fixture.h" />
+		<Unit filename="../Unity-master/extras/fixture/src/unity_fixture_internals.h" />
+		<Unit filename="../Unity-master/extras/fixture/src/unity_fixture_malloc_overrides.h" />
+		<Unit filename="../Unity-master/src/unity.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Unity-master/src/unity.h" />
+		<Unit filename="../Unity-master/src/unity_internals.h" />
+		<Unit filename="../src/umm_info.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/umm_integrity.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/umm_malloc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/umm_malloc.h" />
+		<Unit filename="../src/umm_malloc_cfg.h" />
+		<Unit filename="../src/umm_malloc_cfg_example.h" />
+		<Unit filename="../src/umm_poison.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../test/test_umm_malloc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

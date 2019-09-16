@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "unity_output_spy.h": "c",
+        "unity_fixture.h": "c"
+    }
+}
