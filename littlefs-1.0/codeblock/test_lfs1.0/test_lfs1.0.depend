@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1500361775 source:e:\learn\c\littlefs-1.0\lfs.c
+	"lfs.h"
+	"lfs_util.h"
+	<string.h>
+	<stdlib.h>
+	<assert.h>
+
+1569379670 e:\learn\c\littlefs-1.0\lfs.h
+	<stdint.h>
+
+1569380807 e:\learn\c\littlefs-1.0\lfs_util.h
+	<stdlib.h>
+	<stdint.h>
+	<stdio.h>
+
+1500361775 source:e:\learn\c\littlefs-1.0\lfs_util.c
+	"lfs_util.h"
+
+1569383258 source:e:\learn\c\littlefs-1.0\codeblock\test_lfs1.0\main.c
+	<stdio.h>
+	<stdlib.h>
+	"lfs.h"
+
+1569380459 source:e:\learn\c\littlefs-1.0\codeblock\test_lfs1.0\file_interface.c
+	"./lfs.h"
+	"string.h"
+	<stdio.h>
+

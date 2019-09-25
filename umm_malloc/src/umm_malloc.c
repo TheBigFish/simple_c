@@ -41,13 +41,20 @@
 #include "dbglog/dbglog.h"
 
 /* ------------------------------------------------------------------------- */
-
+/*
+ * block->head->next 域的最高位置为标识该 block 空闲
+ */
 UMM_H_ATTPACKPRE typedef struct umm_ptr_t {
   unsigned short int next;
   unsigned short int prev;
 } UMM_H_ATTPACKSUF umm_ptr;
 
 
+/*
+ * 当块标识为可用时，body->data 处开始存放分配的内存数据
+ * 
+ * used 块在物理上是连续的，free 块在物理上不连续
+ */
 UMM_H_ATTPACKPRE typedef struct umm_block_t {
   union {
     umm_ptr used;
@@ -58,6 +65,7 @@ UMM_H_ATTPACKPRE typedef struct umm_block_t {
   } body;
 } UMM_H_ATTPACKSUF umm_block;
 
+/* 最高位置一表示空闲block*/
 #define UMM_FREELIST_MASK (0x8000)
 #define UMM_BLOCKNO_MASK  (0x7FFF)
 
@@ -102,7 +110,10 @@ static unsigned short int umm_blocks( size_t size ) {
    * pointers is available for data. That's what the first calculation
    * of size is doing.
    */
-
+  
+  /* 
+   * 如果小于 body 能够容纳的数据， 则直接分配1个block
+   */
   if( size <= (sizeof(((umm_block *)0)->body)) )
     return( 1 );
 
@@ -111,6 +122,9 @@ static unsigned short int umm_blocks( size_t size ) {
    * additional whole blocks the size of an umm_block are required.
    */
 
+  /*
+   * 否则，该 block 之后的 block 区域作为连续分配的内存空间，分配出来
+   */
   size -= ( 1 + (sizeof(((umm_block *)0)->body)) );
 
   return( 2 + size/(sizeof(umm_block)) );
@@ -137,7 +151,9 @@ static void umm_split_block( unsigned short int c,
 }
 
 /* ------------------------------------------------------------------------ */
-
+/*
+ * 将块从空闲链表上断开并除去空闲标识
+ */
 static void umm_disconnect_from_free_list( unsigned short int c ) {
   /* Disconnect this block from the FREE list */
 
@@ -154,6 +170,10 @@ static void umm_disconnect_from_free_list( unsigned short int c ) {
  * have the UMM_FREELIST_MASK bit set!
  */
 
+
+/*
+ * 将块 c 以及 N(c) 合并位一个空闲块，以减少内存碎片
+ */
 static void umm_assimilate_up( unsigned short int c ) {
 
   if( UMM_NBLOCK(UMM_NBLOCK(c)) & UMM_FREELIST_MASK ) {
@@ -284,12 +304,18 @@ void umm_free( void *ptr ) {
 
   /* Then assimilate with the previous block if possible */
 
+  /*
+   * 如果P(c) 是空闲块，将块 c 和它 P(c) 合并会将 c 空间归还到空闲区
+   */
   if( UMM_NBLOCK(UMM_PBLOCK(c)) & UMM_FREELIST_MASK ) {
 
     DBGLOG_DEBUG( "Assimilate down to next block, which is FREE\n" );
 
     c = umm_assimilate_down(c, UMM_FREELIST_MASK);
   } else {
+    /*
+     * 否则要将 c 插入空闲链表的头部
+     */
     /*
      * The previous block is not a free block, so add this one to the head
      * of the free list
@@ -404,6 +430,9 @@ void *umm_malloc( size_t size ) {
       /*
        * split current free block `cf` into two blocks. The first one will be
        * returned to user, so it's not free, and the second one will be free.
+       */
+      /*
+       * 将块 cf<->N(cf) 分成两块 cf<->cf+blocks<->N(cf)
        */
       umm_split_block( cf, blocks, UMM_FREELIST_MASK /*new block is free*/ );
 
@@ -551,7 +580,9 @@ void *umm_realloc( void *ptr, size_t size ) {
    * was not exact, then split the memory block so that we use only the requested
    * number of blocks and add what's left to the free list.
    */
-
+  /*
+   * 通过融入相邻 block 来优化分配
+   */
     if (blockSize >= blocks) {
         DBGLOG_DEBUG( "realloc the same or smaller size block - %i, do nothing\n", blocks );
         /* This space intentionally left blank */
